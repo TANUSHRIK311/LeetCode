@@ -1,3 +1,34 @@
+
+//BRUTE FORCE
+//----------------------------------------------------------------------------
+
+var isValidBruteForce = function(s) {
+    let previousLength = -1;
+
+    // Keep loop running as long as the string length is changing
+    while (s.length !== previousLength) {
+        previousLength = s.length;
+        
+        // Remove one instance of each pair
+        s = s.replace('()', '')
+             .replace('[]', '')
+             .replace('{}', '');
+    }
+
+    // If the string is empty, all pairs were matched and removed
+    return s.length === 0;
+};
+
+// Example usage:
+console.log(isValidBruteForce("()[]{}")); // true
+console.log(isValidBruteForce("([{}])")); // true
+console.log(isValidBruteForce("(]"));     // false
+
+//----------------------------------------------------------------------------
+
+
+//STACK METHOD
+//----------------------------------------------------------------------------
 function validParentheses(s) {
     const stack = [];
     const map = {
@@ -47,3 +78,4 @@ var isValid = function(s) {
     
     return stack.length === 0;
 };
+//----------------------------------------------------------------------------
