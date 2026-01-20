@@ -1,3 +1,37 @@
+
+//brute force approach
+var removeNthFromEnd = function(head, n) {
+    let length = 0;
+    let curr = head;
+
+    // Pass 1: Find the total length of the list
+    while (curr !== null) {
+        length++;
+        curr = curr.next;
+    }
+
+    // Special Case: If n equals length, we are removing the head
+    if (n === length) {
+        return head.next;
+    }
+
+    // Pass 2: Move to the node just BEFORE the one we want to remove
+    // The target is at (length - n + 1)
+    // We need to stop at (length - n)
+    let stepsToMove = length - n - 1;
+    curr = head;
+    while (stepsToMove > 0) {
+        curr = curr.next;
+        stepsToMove--;
+    }
+
+    // Skip the target node
+    curr.next = curr.next.next;
+
+    return head;
+};
+
+//optimal two-pointer approach
 var removeNthFromEnd = function(head, n) {
     // Step 1: Create a dummy node to handle edge cases like removing the head
     let dummy = new ListNode(0);
