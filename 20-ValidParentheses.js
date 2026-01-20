@@ -22,3 +22,28 @@ console.log(validParentheses("()[]{}")); // Output: true
 console.log(validParentheses("(]")); // Output: false
 console.log(validParentheses("([)]")); // Output: false
 console.log(validParentheses("{[]}")); // Output: true
+
+//----------------------------------------------------------------------------
+
+
+var isValid = function(s) {
+    let stack = [];
+    
+    for (let char of s) {
+        if (char === '(') {
+            stack.push(')');
+        } else if (char === '{') {
+            stack.push('}');
+        } else if (char === '[') {
+            stack.push(']');
+        } else {
+            // If the char is a closing bracket, it MUST match the popped element
+            // If the stack is empty, stack.pop() returns undefined, which won't match
+            if (stack.pop() !== char) {
+                return false;
+            }
+        }
+    }
+    
+    return stack.length === 0;
+};
